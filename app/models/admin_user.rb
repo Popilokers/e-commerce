@@ -5,6 +5,10 @@ class AdminUser < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   def self.ransackable_attributes(auth_object = nil)
+<<<<<<< HEAD
     %w[id email created_at updated_at]
+=======
+    ["id", "email", "created_at", "updated_at"]
+>>>>>>> admin-dashboard
   end
 end
