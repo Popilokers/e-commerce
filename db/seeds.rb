@@ -11,5 +11,12 @@
 # AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
 
 
-require 'csv'
+Page.find_or_create_by!(slug: "about") do |p|
+  p.title = "About"
+end
+
+Page.find_or_create_by!(slug: "contact") do |p|
+  p.title = "Contact"
+end
+
 
