@@ -62,13 +62,15 @@ group :test do
   gem "selenium-webdriver"
 end
 
-gem 'sprockets-rails'
-gem 'sassc-rails'
+gem "sprockets-rails"
+gem "sassc-rails"
+gem "kaminari"
 
-gem 'activeadmin'
+
+gem "activeadmin"
 
 # Plus integrations with:
-gem 'devise'
-gem 'cancancan'
-gem 'draper'
-gem 'pundit'
+gem "devise"
+gem "cancancan"
+gem "draper"
+gem "pundit"

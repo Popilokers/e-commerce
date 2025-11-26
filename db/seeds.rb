@@ -10,13 +10,33 @@
 
 # AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
 
+# Page.find_or_create_by!(slug: "about") do |p|
+#   p.title = "About"
+# end
 
-Page.find_or_create_by!(slug: "about") do |p|
-  p.title = "About"
-end
+# Page.find_or_create_by!(slug: "contact") do |p|
+#   p.title = "Contact"
+# end
 
-Page.find_or_create_by!(slug: "contact") do |p|
-  p.title = "Contact"
-end
+# require 'csv'
 
+# # read .csv files
 
+# # https://www.datablist.com/learn/csv/download-sample-csv-files#products-dataset
+# product_csv = Rails.root.join('db/products.csv')
+
+# # inserts data into Products table
+
+# CSV.foreach(product_csv, headers: true) do |product|
+#   puts "Seeding Product: #{product.to_h}"
+#     category = Category.find_or_create_by(name: product["Category"])
+#     Product.create!(
+#       name: product["Name"],
+#       price: product["Price"].to_f,
+#       description: product["Description"],
+#       stock_quantity: rand(0..100),
+#       category: category
+#     )
+# end
+
+# puts "Seeding Products Complete. Total Products: #{Product.count}"

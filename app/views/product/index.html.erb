@@ -1,0 +1,52 @@
+<h1>Product#index</h1>
+<p>Find me in app/views/product/index.html.erb</p>
+
+<style>
+  table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse; /* This makes sure borders are not doubled */
+  }
+  th, td {
+    padding: 8px;
+  }
+</style>
+
+
+ <div class="columns is-multiline">
+  <% @products.each do |product| %>
+    <div class="column is-4 is-flex">
+
+      <div class="box is-flex is-flex-direction-column is-flex-grow-1">
+
+        <div class="is-flex">
+          <!-- IMAGE LEFT -->
+          <figure class="image is-128x128 mr-4">
+            <% if product.image.attached? %>
+              <%= image_tag url_for(product.image), alt: product.name %>
+            <% else %>
+              <%= image_tag "", alt: "No image" %>
+            <% end %>
+          </figure>
+
+          <!-- TEXT RIGHT -->
+          <div class="content is-flex-grow-1">
+            <p><strong><%= link_to product.name, product_path(product) %></strong></p>
+            <p><strong>Price: <%= product.price %></strong></p>
+            <p>Stock: <%= product.stock_quantity %></p>
+
+            <!-- Push Add button to bottom -->
+            <div class="mt-auto">
+              
+              <button class="button is-primary is-small">Add</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  <% end %>
+  
+<%= paginate @products, params: { query: params[:query], category_id: params[:category_id] } %>
+    
+</div>
+

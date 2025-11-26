@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  get "product/index", to: "product#index", as: "products_index"
+  get "product/:id", to: "product#show", as: "product"
+  get "product/addToCart"
+
+resources :products
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
