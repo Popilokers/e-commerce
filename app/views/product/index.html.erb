@@ -32,15 +32,15 @@
             <p><strong><%=  product.name %></strong></p>
             <p><strong>Price: <%= product.price %></strong></p>
             <% if product.stock_quantity > 0 %>
-                <p><b style="color:green">In Stock</b></p>
+                <p style="font-size: 25px; color: #11ff00ff; -webkit-text-stroke: 1px black; " ><b >In Stock</b></p>
             <% else %>
-                <p><b style="color: red">Out of stock</b></p> 
+                <p style="font-size: 25px; color: #ff0000ff; -webkit-text-stroke: 1px black; "><b>Out of stock</b></p> 
             <% end %>
 
             <!-- Push Add button to bottom -->
             <div class="mt-auto">
               
-              <p><%= link_to "View Product", product_path(product), class: "button is-small", style:"background-color: green !important" %>
+              <p><%= link_to "View Product", product_path(product), class: "button is-small" %>
 </p>
             </div>
           </div>

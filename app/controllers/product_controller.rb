@@ -12,6 +12,14 @@ class ProductController < ApplicationController
       @products = @products.where(category_id: params[:category_id])
     end
 
+    if params[:date_filter].present?
+      if params[:date_filter] == 'new'
+        @products = @products.where("created_at >= ?", 3.days.ago)
+      elsif params[:date_filter] == 'update'
+        @products = @products.where("updated_at >= ?", 3.days.ago)
+      end
+    end
+
     # paginate *after* filtering
     @products = @products.page(params[:page]).per(9)
   end
