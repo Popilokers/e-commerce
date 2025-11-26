@@ -1,8 +1,7 @@
-<link rel="stylesheet" href="application.css">
 
 <nav class="navbar is-link" role="navigation" aria-label="main navigation">
   <div class="navbar-menu">
- 
+    
 
     <!-- Hamburger menu for mobile -->
     <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarMenu">
@@ -13,6 +12,9 @@
   </div>
 
   <div id="navbarMenu" class="navbar-end" style="margin-top:10px; margin-right: 10px;">
+    <%= link_to "Login", login_path, class: "button is-primary", style:"height: 37px; display: flex; align-items: center; justify-content: center; color: white;"%>
+    <%= link_to "Register", register_path, class: "button is-primary", style:"height: 37px; display: flex; align-items: center; justify-content: center; color: white;"%>
+
 
     <%= form_with url: products_index_path, class: "control", method: :get, local: true , data: { turbo: false } do %>
       <%= text_field_tag :query, params[:query], class:"input", placeholder: "Search Product Names", style:"width: 300px; height: 37px" %>
@@ -24,7 +26,7 @@
       <%= button_tag "Filter" , class:"button is-primary" , style:"height: 37px; margin-right:5px;color: white"%>
     <% end %>
     
-    <a class="button is-primary is-medium" style="height: 37px; display: flex; align-items: center; justify-content: center; color: white;" href="/product" >Clear Filter</a>
+    <a class="button is-primary is-medium" style="height: 37px; display: flex; align-items: center; justify-content: center; color: white;" href="/" >Clear Filter</a>
   </div>
 </nav>
 

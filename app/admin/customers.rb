@@ -5,10 +5,10 @@ ActiveAdmin.register Customer do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  # permit_params :first_name, :last_name, :email, :password, :carnumber, :points
+  # permit_params :first_name, :last_name, :email, :password, :cardumber, :points
 
   permit_params do
-    permitted = [:first_name, :last_name, :email, :carnumber, :points]
+    permitted = [:first_name, :last_name, :email, :cardnumber, :points, :address, province]
     # Allow password only when creating a new record
     permitted << :password << :password_confirmation= if params[:action] == 'create'
     permitted
@@ -37,7 +37,7 @@ ActiveAdmin.register Customer do
       if f.object.new_record?
         f.input :password
       end
-      f.input :carnumber
+      f.input :cardumber
       f.input :points
     end
     f.actions
@@ -48,7 +48,7 @@ ActiveAdmin.register Customer do
       row :first_name
       row :last_name
       row :email
-      row :carnumber
+      row :cardumber
       row :points
     end
   end

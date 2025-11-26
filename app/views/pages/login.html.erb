@@ -1,0 +1,21 @@
+<div style="height: 93.55vh">
+    <h1 class="title is-1" style="color: #1c4ecdff;">Register</h1>
+    <div style="border: 2px solid red; display:flex; justify-content:center; align-items:center; margin:150px; margin-top:50px;">
+        <%= form_with model: (@customer || Customer.new), local: true do |f| %>
+        
+        <div class="actions">
+            <%= f.label :Email %>
+            <%= f.email_field :email %>
+        </div>
+
+        <div class="actions">
+            <%= f.label :Password %>
+            <%= f.password_field :password %>
+        </div>
+
+        <div class="actions">
+            <%= f.submit "Log In" %>
+        </div>
+        <% end %>
+    </div>
+</div>
