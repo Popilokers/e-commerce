@@ -10,10 +10,9 @@ class CustomersController < ApplicationController
   def create
     @customer = Customer.new(customer_params)
       if @customer.save
-          redirect_to root_path, notice: "Successfully Registered!"
+          redirect_to login_path, notice: "Successfully Registered!"
       else
         Rails.logger.error(@customer.errors.full_messages)
-        render :new
       end
   end
 

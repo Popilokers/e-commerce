@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   resources :customers, only: [:new, :create, :show]
 
   get "pages/login", to: "pages#login", as: "login"
+  post "pages/login_check", to: "pages#login_check", as: "login_check"
+  get "pages/logout", to: "pages#logout", as: "logout"
   get "pages/register", to: "pages#register", as: "register"
   get "pages/about"
   get "pages/contact"

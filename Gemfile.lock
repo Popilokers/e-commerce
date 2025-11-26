@@ -432,6 +432,7 @@ PLATFORMS
 
 DEPENDENCIES
   activeadmin
+  bcrypt
   bootsnap
   brakeman
   cancancan

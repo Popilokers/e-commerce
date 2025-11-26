@@ -66,6 +66,7 @@ gem "sprockets-rails"
 gem "sassc-rails"
 gem "kaminari"
 
+gem 'bcrypt'
 
 gem "activeadmin"
 
