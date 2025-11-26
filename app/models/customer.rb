@@ -4,4 +4,8 @@ class Customer < ApplicationRecord
     ["carnumber", "created_at", "email", "first_name", "id", "last_name", "password", "points", "updated_at"]
   end
 
+  def full_name
+    "#{first_name} #{last_name}"
+  end
+
 end
