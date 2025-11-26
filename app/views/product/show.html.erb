@@ -1,8 +1,36 @@
 <h1>Product#show</h1>
 <p>Find me in app/views/product/show.html.erb</p>
 
-<h1><%= @product.name %></h1>
-<p><%= @product.description %></p>
-<p>Price: <%= number_to_currency(@product.price) %></p>
-<p>Stock Quantity: <%= @product.stock_quantity %></p>
-<p>Category: <%= @product.category.name %></p>
+
+
+<div style="display: flex; padding-left:100px; padding-right:100px">
+    <div>
+        <% if @product.image.attached? %>
+            <%= image_tag url_for(@product.image), style: "width: 400px; height:auto;", alt: @product.name %>
+        <% else %>
+            <%= image_tag "", alt: "No image" %>
+        <% end %>
+    </div>
+    <div>
+        <h1 style="font-size: 50px ; font-weight: bold"><%= @product.name %></h1>
+        <p style="font-size: 27px ; font-weight: bold">Price: <%= number_to_currency(@product.price) %></p>
+        <% if @product.stock_quantity > 0 %>
+            <p style="font-size: 27px; font-weight: bold">Status: <b style="color:green"> In Stock</b></p>
+        <% else %>
+            <p style="font-size: 27px; font-weight: bold">Status: <b style="color: red">Out of stock</b></p> 
+        <% end %>
+        <p style="font-size: 27px ; font-weight: bold">Category: <%= @product.category.name %></p>
+
+        <form method="post">
+            <label style="font-size: 27px; font-weight: bold">Quantity</label>
+            <input type="number" style="width:65px" min="1">
+            <br>
+            
+            <button class="button is-primary is-medium" style="margin-top:10px; color: white; font-weight: bold">Add To Cart</button>
+        </form>
+    </div>
+</div>
+<h1 style="font-size: 50px ; font-weight: bold">Description:</h1>
+<div style="padding:50px">
+    <p style="font-size: 40px ; font-weight: bold"><%= @product.description %></p>
+</div>

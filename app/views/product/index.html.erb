@@ -1,5 +1,4 @@
-<h1>Product#index</h1>
-<p>Find me in app/views/product/index.html.erb</p>
+<h1 class="title is-1" style="color: blue;">Products</h1>
 
 <style>
   table, th, td {
@@ -16,13 +15,13 @@
   <% @products.each do |product| %>
     <div class="column is-4 is-flex">
 
-      <div class="box is-flex is-flex-direction-column is-flex-grow-1">
+      <div class="box is-flex is-flex-direction-column is-flex-grow-1" style="background-color: #7e83b6ff">
 
         <div class="is-flex">
           <!-- IMAGE LEFT -->
           <figure class="image is-128x128 mr-4">
             <% if product.image.attached? %>
-              <%= image_tag url_for(product.image), alt: product.name %>
+              <%= image_tag url_for(product.image), style: "max-width: 100px; max-height:150px;", alt: product.name %>
             <% else %>
               <%= image_tag "", alt: "No image" %>
             <% end %>
@@ -30,14 +29,19 @@
 
           <!-- TEXT RIGHT -->
           <div class="content is-flex-grow-1">
-            <p><strong><%= link_to product.name, product_path(product) %></strong></p>
+            <p><strong><%=  product.name %></strong></p>
             <p><strong>Price: <%= product.price %></strong></p>
-            <p>Stock: <%= product.stock_quantity %></p>
+            <% if product.stock_quantity > 0 %>
+                <p><b style="color:green">In Stock</b></p>
+            <% else %>
+                <p><b style="color: red">Out of stock</b></p> 
+            <% end %>
 
             <!-- Push Add button to bottom -->
             <div class="mt-auto">
               
-              <button class="button is-primary is-small">Add</button>
+              <p><%= link_to "View Product", product_path(product), class: "button is-small", style:"background-color: green !important" %>
+</p>
             </div>
           </div>
         </div>
@@ -46,7 +50,8 @@
     </div>
   <% end %>
   
-<%= paginate @products, params: { query: params[:query], category_id: params[:category_id] } %>
-    
 </div>
 
+    <div class="is-flex is-justify-content-center" role="navigation" aria-label="pagination">
+      <%= paginate @products, params: { query: params[:query], category_id: params[:category_id] } %>
+    </div>

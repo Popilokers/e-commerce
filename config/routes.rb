@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get "product/index", to: "product#index", as: "products_index"
+  get "product", to: "product#index", as: "products_index"
   get "product/:id", to: "product#show", as: "product"
   get "product/addToCart"
 

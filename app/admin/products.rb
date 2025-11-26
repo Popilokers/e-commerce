@@ -34,7 +34,7 @@ ActiveAdmin.register Product do
       # Upload field
       f.input :image, as: :file, hint: (
         f.object.image.attached? ?
-          image_tag(url_for(f.object.image), style: "width: 80px; height:auto") :
+          image_tag(url_for(f.object.image), style: "width: 80px; height:auto; max-height: 90px") :
           content_tag(:span, "No image uploaded yet")
       )
     end

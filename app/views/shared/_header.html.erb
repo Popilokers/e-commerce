@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="application.css">
+
 <nav class="navbar is-link" role="navigation" aria-label="main navigation">
   <div class="navbar-menu">
  
@@ -16,22 +18,12 @@
       <%= text_field_tag :query, params[:query], class:"input", placeholder: "Search Product Names", style:"width: 300px; height: 37px" %>
 
       <%= select_tag :category_id, options_from_collection_for_select(Category.all, :id, :name, params[:category_id]), include_blank: "All Categories", class:"dropdown-content" %>
-      <%= submit_tag "Filter" , class: "button is-primary" , style:"height: 37px; margin-right:5px;"%>
+      
+      <%= button_tag "Filter" , class:"button is-primary" , style:"height: 37px; margin-right:5px;color: white"%>
     <% end %>
     
-    <a class= "button is-primary is-pulled-right" style="height: 37px; " href="/product/index" >Clear Filter</a>
+    <a class="button is-primary is-medium" style="height: 37px; display: flex; align-items: center; justify-content: center; color: white;" href="/product" >Clear Filter</a>
   </div>
 </nav>
 
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const burgers = Array.from(document.querySelectorAll('.navbar-burger'));
-    burgers.forEach(burger => {
-      burger.addEventListener('click', () => {
-        const target = document.getElementById(burger.dataset.target);
-        burger.classList.toggle('is-active');
-        target.classList.toggle('is-active');
-      });
-    });
-  });
-</script>
+
