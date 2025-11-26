@@ -1,4 +1,21 @@
 Rails.application.routes.draw do
+
+  get "product", to: "product#index", as: "products_index"
+  get "product/:id", to: "product#show", as: "product"
+  get "product/addToCart"
+
+  # get "customers/:id", to: "customers#show", as: "customer"
+  resources :customers, only: [:new, :create, :show]
+
+  get "pages/login", to: "pages#login", as: "login"
+  post "pages/login_check", to: "pages#login_check", as: "login_check"
+  get "pages/logout", to: "pages#logout", as: "logout"
+  get "pages/register", to: "pages#register", as: "register"
+  get "pages/about"
+  get "pages/contact"
+
+
+resources :products
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
@@ -12,5 +29,5 @@ Rails.application.routes.draw do
   # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
 
   # Defines the root path route ("/")
-  # root "posts#index"
+   root "product#index"
 end
