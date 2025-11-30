@@ -30,7 +30,7 @@
 
       <%= select_tag :date_filter, options_for_select([['Recently Added', 'new'], ['Recently Updated', 'update']], params[:date]), include_blank: "Select Date" %>
       
-      <%= button_tag "Filter" , class:"button is-primary" , style:"height: 37px; margin-right:5px;color: white"%>
+      <button type="submit" style="height:37px">Filter</button>
     <% end %>
     
         <%= link_to "Clear Filter", root_path, class: "button is-primary", style:"height: 37px; display: flex; align-items: center; justify-content: center; color: white;"%>
