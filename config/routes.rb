@@ -12,7 +12,6 @@ Rails.application.routes.draw do
   get "pages/logout", to: "pages#logout", as: "logout"
   get "pages/register", to: "pages#register", as: "register"
   get "pages/cart", to: "pages#cart", as: "cart"
-  delete "pages/cart", to: "pages#removeFromCart", as: "remove"
   get "pages/about"
   get "pages/contact"
 

@@ -10,15 +10,12 @@
         <th>Quantity</th>
         <th>Price</th>
     </tr>
-    <% @cart_items.each_with_index do |item, index| %>
+    <% @cart_items.each do |item| %>
         <% if item[:product] %>
             <tr>
                 <td><%= item[:product].name %> </td>
                 <td><input type="number" value="<%= item[:quantity] %>" style="width:67px" min="1" max="<%=item[:product].stock_quantity%>"></td>
                 <td>$<%= item[:product].price %></td>
-                <td>
-                <%= button_to "Delete", remove_path(index: index), method: :delete, data: { confirm: "Are you sure?" } %>
-                </td>
             </tr>
         <% end %>
     <% end %>
