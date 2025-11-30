@@ -1,6 +1,7 @@
 
 
 <div style="display: flex; padding-left:100px; padding-right:100px">
+    
     <div>
         <% if @product.image.attached? %>
             <%= image_tag url_for(@product.image), style: "width: 400px; height:auto;", alt: @product.name %>
@@ -18,13 +19,15 @@
         <% end %>
         <p style="font-size: 27px ; font-weight: bold">Category: <%= @product.category.name %></p>
 
-        <form method="post">
-            <label style="font-size: 27px; font-weight: bold">Quantity</label>
-            <input type="number" style="width:65px" min="1">
+        <%= form_with url: addtocart_path(@product.id), class: "control", method: :get, local: true , data: { turbo: false } do |f| %>
+            <div class="actions">
+                <%= f.label :Quantity, style:"font-size: 27px ; font-weight: bold" %>
+                <%= f.number_field :quantity, style:"width:65px", value:"1", min:"1", max:"#{@product.stock_quantity}"%>
+            </div>
             <br>
             
-            <button class="button is-primary is-medium" style="margin-top:10px; color: white; font-weight: bold">Add To Cart</button>
-        </form>
+            <button class="button is-medium" style="margin-top:10px; color: white; font-weight: bold">Add To Cart</button>
+        <% end %>
     </div>
 </div>
 <h1 style="font-size: 50px ; font-weight: bold">Description:</h1>

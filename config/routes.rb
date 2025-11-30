@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
   get "product", to: "product#index", as: "products_index"
   get "product/:id", to: "product#show", as: "product"
-  get "product/addToCart"
+  get "product/:id/addtocart", to: "product#addToCart", as: "addtocart"
 
   # get "customers/:id", to: "customers#show", as: "customer"
   resources :customers, only: [:new, :create, :show]
@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   post "pages/login_check", to: "pages#login_check", as: "login_check"
   get "pages/logout", to: "pages#logout", as: "logout"
   get "pages/register", to: "pages#register", as: "register"
+  get "pages/cart", to: "pages#cart", as: "cart"
   get "pages/about"
   get "pages/contact"
 

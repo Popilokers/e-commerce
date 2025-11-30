@@ -1,8 +1,12 @@
 <div style="height: 93.55vh">
+
+
     <h1 class="title is-1" style="color: #1c4ecdff;">Log In</h1>
     <div style="border: 2px solid red; display:flex; justify-content:center; align-items:center; margin:150px; margin-top:50px;">
         <%= form_with url: login_check_path, local: true do |f| %>
-        
+<% if flash[:alert] %>
+  <p class="alert" style="color: red;"><%= flash[:alert] %></p>
+<% end %>
         <div class="actions">
             <%= f.label :Email %>
             <%= f.email_field :email %>

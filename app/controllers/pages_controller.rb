@@ -3,27 +3,27 @@ class PagesController < ApplicationController
     
   end
   
-def login_check
-  @customer = Customer.find_by(email: params[:email])
-  
-  if @customer&.authenticate(params[:password])
+  def login_check
+    @customer = Customer.find_by(email: params[:email])
+    
+    if @customer&.authenticate(params[:password])
 
-    session[:customer_first_name] = @customer.first_name   # store customer ID in session
-    session[:customer_last_name] = @customer.last_name   # store customer ID in session
-    session[:customer_full] = @customer.full_name   # store customer ID in session
-    session[:customer_email] = @customer.email   # store customer ID in session
-    session[:customer_id] = @customer.id   # store customer ID in session
-    session[:customer_address] = @customer.address   # store customer ID in session
-    session[:customer_province] = @customer.province   # store customer ID in session
+      session[:customer_first_name] = @customer.first_name   # store customer ID in session
+      session[:customer_last_name] = @customer.last_name   # store customer ID in session
+      session[:customer_full] = @customer.full_name   # store customer ID in session
+      session[:customer_email] = @customer.email   # store customer ID in session
+      session[:customer_id] = @customer.id   # store customer ID in session
+      session[:customer_address] = @customer.address   # store customer ID in session
+      session[:customer_province] = @customer.province   # store customer ID in session
+      session[:customer_cart] ||= []
 
-
-    flash[:notice] = "Login successful"
-    redirect_to root_path
-  else
-    flash[:alert] = "Invalid email or password"
-    redirect_to login_path
+      flash[:notice] = "Login successful"
+      redirect_to root_path
+    else
+      flash[:alert] = "Invalid email or password"
+      redirect_to login_path
+    end
   end
-end
 
   def logout
     session[:customer_first_name] = nil
@@ -33,10 +33,20 @@ end
     session[:customer_id] = nil
     session[:customer_address] = nil
     session[:customer_province] = nil
+    session[:customer_cart] = nil
     redirect_to login_path
   end
 
   def register
+  end
+
+  def cart
+    # session[:cart] might be nil the first time, so we default to empty array
+    @cart_items = (session[:cart] || []).map do |item|
+      product = Product.find_by(id: item["product_id"])
+      quantity = item["quantity"]
+      { product: product, quantity: quantity }
+    end
   end
 
   def about

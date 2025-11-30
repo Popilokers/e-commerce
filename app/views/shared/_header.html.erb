@@ -4,12 +4,18 @@
     
     <div style="display: flex; margin:10px">
         <%= link_to "Home", root_path, class: "button is-primary", style:"height: 37px; display: flex; align-items: center; justify-content: center; color: white;"%>
+      
       <% if session[:customer_id].present? %>
+      
         <%= link_to "Profile", customer_path(session["customer_id"]), class: "button is-primary", style:"height: 37px; display: flex; align-items: center; justify-content: center; color: white;"%>
         <%= link_to "Logout", logout_path, class: "button is-primary", style:"height: 37px; display: flex; align-items: center; justify-content: center; color: white;"%>
+        <%= link_to "Cart", cart_path, class: "button is-primary", style:"height: 37px; display: flex; align-items: center; justify-content: center; color: white;"%>
+      
       <% else %>
-      <%= link_to "Login", login_path, class: "button is-primary", style:"height: 37px; display: flex; align-items: center; justify-content: center; color: white;"%>
+       
+        <%= link_to "Login", login_path, class: "button is-primary", style:"height: 37px; display: flex; align-items: center; justify-content: center; color: white;"%>
         <%= link_to "Register", register_path, class: "button is-primary", style:"height: 37px; display: flex; align-items: center; justify-content: center; color: white;"%>
+      
       <% end %>
     </div>
     <!-- Hamburger menu for mobile -->
