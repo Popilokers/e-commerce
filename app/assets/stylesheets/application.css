@@ -14,3 +14,8 @@
  *= require active_admin
  *= require_tree .
 */
+
+.cart-row{
+    border-top: 2px solid grey;
+    
+}

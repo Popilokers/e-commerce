@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   get "pages/register", to: "pages#register", as: "register"
   get "pages/cart", to: "pages#cart", as: "cart"
   delete "pages/cart", to: "pages#removeFromCart", as: "remove"
+  patch "/cart/update_quantity", to: "pages#update_quantity"
+  get "pages/cart/invoice", to: "pages#invoice", as: "invoice"
   get "pages/about"
   get "pages/contact"
 

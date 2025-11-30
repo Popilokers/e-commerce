@@ -64,6 +64,33 @@ class PagesController < ApplicationController
     redirect_to cart_path
   end
 
+  def update_quantity
+    Rails.logger.info "Before update: #{session[:cart].inspect}"
+    session[:cart] ||= []
+
+    index = params[:index].to_i
+    quantity = params[:quantity].to_i
+
+    quantity = 1 if quantity < 1
+      if index >= 0 && index < session[:cart].length
+        session[:cart][index]["quantity"] = quantity
+        head :ok
+      else
+        head :unprocessable_entity
+      end
+  end
+
+  
+
+  def invoice
+    # session[:cart] might be nil the first time, so we default to empty array
+    @cart_items = (session[:cart] || []).map do |item|
+      product = Product.find_by(id: item["product_id"])
+      quantity = item["quantity"]
+      { product: product, quantity: quantity }
+    end
+  end
+
   def about
   end
 
