@@ -15,7 +15,7 @@ class PagesController < ApplicationController
       session[:customer_id] = @customer.id   # store customer ID in session
       session[:customer_address] = @customer.address   # store customer ID in session
       session[:customer_province] = @customer.province   # store customer ID in session
-      session[:customer_cart] ||= []
+      session[:cart] ||= []
 
       flash[:notice] = "Login successful"
       redirect_to root_path
@@ -33,7 +33,7 @@ class PagesController < ApplicationController
     session[:customer_id] = nil
     session[:customer_address] = nil
     session[:customer_province] = nil
-    session[:customer_cart] = nil
+    session[:cart] = nil
     redirect_to login_path
   end
 
