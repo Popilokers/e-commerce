@@ -49,6 +49,21 @@ class PagesController < ApplicationController
     end
   end
 
+  def removeFromCart
+    session[:cart] ||= []
+
+    index = params[:index].to_i
+
+    if index >= 0 && index < session[:cart].length
+      session[:cart].delete_at(index)
+      flash[:notice] = "Product removed from cart!"
+    else
+      flash[:alert] = "Invalid item!"
+    end
+
+    redirect_to cart_path
+  end
+
   def about
   end
 
