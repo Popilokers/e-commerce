@@ -1,2 +1,11 @@
-<h1>logged in as: <%=@customer.email%></h1>
 
+<div style="height: 95vh">
+
+    <%# <h1>logged in as: <%=@customer.id %></h1>
+    <% if session[:customer_id] == @customer.id%>
+        <h1>logged in as: <%=session[:customer_full]%></h1>
+
+    <%else%>
+
+    <%end%>
+</div>

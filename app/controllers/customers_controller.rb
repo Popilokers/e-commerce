@@ -16,6 +16,9 @@ class CustomersController < ApplicationController
       end
   end
 
+  def update
+  end
+
     private
 
     def customer_params

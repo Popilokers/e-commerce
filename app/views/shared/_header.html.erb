@@ -2,7 +2,16 @@
 <nav class="navbar is-link" role="navigation" aria-label="main navigation">
   <div class="navbar-menu">
     
-
+    <div style="display: flex; margin:10px">
+        <%= link_to "Home", root_path, class: "button is-primary", style:"height: 37px; display: flex; align-items: center; justify-content: center; color: white;"%>
+      <% if session[:customer_id].present? %>
+        <%= link_to "Profile", customer_path(session["customer_id"]), class: "button is-primary", style:"height: 37px; display: flex; align-items: center; justify-content: center; color: white;"%>
+        <%= link_to "Logout", logout_path, class: "button is-primary", style:"height: 37px; display: flex; align-items: center; justify-content: center; color: white;"%>
+      <% else %>
+      <%= link_to "Login", login_path, class: "button is-primary", style:"height: 37px; display: flex; align-items: center; justify-content: center; color: white;"%>
+        <%= link_to "Register", register_path, class: "button is-primary", style:"height: 37px; display: flex; align-items: center; justify-content: center; color: white;"%>
+      <% end %>
+    </div>
     <!-- Hamburger menu for mobile -->
     <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarMenu">
       <span aria-hidden="true"></span>
@@ -13,25 +22,18 @@
 
   <div id="navbarMenu" class="navbar-end" style="margin-top:10px; margin-right: 10px;">
 
-    <% if session[:customer_id].present? %>
-       <%= link_to "Profile", customer_path(session["customer_id"]), class: "button is-primary", style:"height: 37px; display: flex; align-items: center; justify-content: center; color: white;"%>
-      <%= link_to "Logout", logout_path, class: "button is-primary", style:"height: 37px; display: flex; align-items: center; justify-content: center; color: white;"%>
-    <% else %>
-     <%= link_to "Login", login_path, class: "button is-primary", style:"height: 37px; display: flex; align-items: center; justify-content: center; color: white;"%>
-      <%= link_to "Register", register_path, class: "button is-primary", style:"height: 37px; display: flex; align-items: center; justify-content: center; color: white;"%>
-    <% end %>
 
     <%= form_with url: products_index_path, class: "control", method: :get, local: true , data: { turbo: false } do %>
       <%= text_field_tag :query, params[:query], class:"input", placeholder: "Search Product Names", style:"width: 300px; height: 37px" %>
 
-      <%= select_tag :category_id, options_from_collection_for_select(Category.all, :id, :name, params[:category_id]), include_blank: "All Categories", class:"dropdown-content" %>
+      <%= select_tag :category_id, options_from_collection_for_select(Category.all, :id, :name, params[:category_id]), include_blank: "All Categories"  %>
 
-      <%= select_tag :date_filter, options_for_select([['Recently Added', 'new'], ['Recently Updated', 'update']], params[:date]), include_blank: "Select Date", class:"dropdown-content" %>
+      <%= select_tag :date_filter, options_for_select([['Recently Added', 'new'], ['Recently Updated', 'update']], params[:date]), include_blank: "Select Date" %>
       
       <%= button_tag "Filter" , class:"button is-primary" , style:"height: 37px; margin-right:5px;color: white"%>
     <% end %>
     
-    <a class="button is-primary is-medium" style="height: 37px; display: flex; align-items: center; justify-content: center; color: white;" href="/" >Clear Filter</a>
+        <%= link_to "Clear Filter", root_path, class: "button is-primary", style:"height: 37px; display: flex; align-items: center; justify-content: center; color: white;"%>
   </div>
 </nav>
 
