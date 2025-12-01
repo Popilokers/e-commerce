@@ -59,8 +59,12 @@ end
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
-  gem "selenium-webdriver"
 end
+
+gem "httparty"
+gem "nokogiri"
+gem "csv"
+gem "selenium-webdriver"
 
 gem "sprockets-rails"
 gem "sassc-rails"
