@@ -15,6 +15,7 @@ class PagesController < ApplicationController
       session[:customer_id] = @customer.id   # store customer ID in session
       session[:customer_address] = @customer.address   # store customer ID in session
       session[:customer_province] = @customer.province.code  # store customer ID in session
+      session[:province_id] = @customer.province.id  # store customer ID in session
       session[:province_gst] = @customer.province.gst  # store customer ID in session
       session[:province_pst] = @customer.province.pst  # store customer ID in session
       session[:province_hst] = @customer.province.hst  # store customer ID in session
@@ -36,6 +37,10 @@ class PagesController < ApplicationController
     session[:customer_id] = nil
     session[:customer_address] = nil
     session[:customer_province] = nil
+    session[:province_id] = nil
+    session[:province_gst] = nil 
+    session[:province_pst] = nil  
+    session[:province_hst] = nil  
     session[:cart] = nil
     redirect_to login_path
   end
@@ -81,6 +86,19 @@ class PagesController < ApplicationController
       else
         head :unprocessable_entity
       end
+  end
+
+  def update_province
+      if params[:province_id].present?
+        province = Province.find(params[:province_id])
+        session[:province_id] = province.id
+        session[:province_pst] = province.pst
+        session[:province_gst] = province.gst
+        session[:province_hst] = province.hst
+      end
+
+    @cart_items = session[:cart] || []
+    redirect_to cart_path
   end
 
   def checkout

@@ -1,6 +1,6 @@
 
 
-<div style=" padding:50px; height:93vh; max-height: 93vh;"><h2>Your Cart</h2>
+<div style=" padding:50px; height:93vh; max-height: 93vh;"><h2><%=link_to "Your Cart", cart_path%></h2>
     <% if @cart_items.empty? %>
       <p>Your cart is empty.</p>
     <% else %>
@@ -32,7 +32,17 @@
       <% hst = subtotal * BigDecimal(session[:province_hst].to_s) %>
       <% grandtotal = subtotal + gst + pst + hst%>
 
+      <%= form_with url: update_province_path, method: :get, local: true do %>
+        <%= select_tag :province_id,
+          options_from_collection_for_select(
+            Province.all, :id, :name, session[:province_id]
+          ),
+          id: "provinces", onchange: "this.form.submit();" %>
+      <% end %>
+
+                    
         <%= button_to "Refresh Cart", cart_path, method: :get %>
+
       <div style="display:flex; flex-direction:column; align-items:flex-end; margin-right:230px">
         <p  class="title is-5" style="color: #1c4ecdff;">SubTotal: <%=subtotal%></p>
         <br>
