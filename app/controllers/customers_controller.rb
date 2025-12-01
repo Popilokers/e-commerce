@@ -15,7 +15,8 @@ class CustomersController < ApplicationController
       else
         Rails.logger.error(@customer.errors.full_messages)
         # Re-render the form so user can fix mistakes
-        flash.now[:alert] = "Please fix the errors below."
+        flash[:alert] = "Please fill in all fields"
+        redirect_to register_path
       end
   end
 

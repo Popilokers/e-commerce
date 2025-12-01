@@ -1,44 +1,76 @@
 <div style="height: 93.55vh">
     <h1 class="title is-1" style="color: #1c4ecdff;">Register</h1>
-    <div style="border: 2px solid red; display:flex; justify-content:center; align-items:center; margin:150px; margin-top:50px;">
-        <%= form_with model: (@customer || Customer.new), local: true do |f| %>
-            <table>
-                <div class="actions">
+    <div style="display:flex; justify-content:center; align-items:center;">
+
+        <div style="width:800px;border: 7px solid #122e74ff; border-radius:10px; padding:10px; display:flex; justify-content:center; align-items:center; ">
+            
+            <%= form_with model: (@customer || Customer.new), local: true do |f| %>
+            
+                        <p style="color:red"><%=flash[:alert]%></p>
+                <table>
+                    <div class="actions">
+                        <tr>
+                            <td><%= f.label :first_name %></td>
+                            <td><%= f.text_field :first_name ,style:"width:225px"%></td>
+                        </tr>
+                        
+                        
+                    </div>
+
+                    <div class="actions">
+                        <tr>
+                            <td><%= f.label :last_name %></td>
+                            <td> <%= f.text_field :last_name ,style:"width:225px"%></td>
+                        </tr>
+                        
+                       
+                    </div>
+
+                    <div class="actions">
+                        <tr>
+                            <td><%= f.label :email %></td>
+                            <td><%= f.email_field :email ,style:"width:225px" %></td>
+                        </tr>
+                        
+                        
+                    </div>
+
+                    <div class="actions">
+                        
+                        <tr>
+                            <td><%= f.label :password %></td>
+                            <td><%= f.password_field :password ,style:"width:225px" %></td>
+                        </tr>
+                        
+                    </div> 
                     
-                    <%= f.label :first_name %>
-                    <%= f.text_field :first_name %>
-                </div>
+                    <div class="actions">
+                        <tr>
+                            <td><%= f.label :address %></td>
+                            <td><%= f.text_field :address ,style:"width:225px" %></td>
+                        </tr>
+                        
+                        
+                    </div>
 
-                <div class="actions">
-                    <%= f.label :last_name %>
-                    <%= f.text_field :last_name %>
-                </div>
+                    <div class="actions">
+                        <tr>
+                            <td><%= f.label :province, "Province" %></td>
+                            <td><%= f.collection_select :province_id, Province.all, :id, :name, prompt: "Select a province" %></td>
+                        </tr>
+                        
+                        
+                    </div>
 
-                <div class="actions">
-                    <%= f.label :email %>
-                    <%= f.email_field :email %>
-                </div>
-                
-                <div class="actions">
-                    <%= f.label :password %>
-                    <%= f.password_field :password %>
-                </div> 
+                    <div class="actions">
+                        <tr>
+                            <td><%= f.submit "Register" %></td>
+                        </tr>
+                        
+                    </div>
 
-                <div class="actions">
-                    <%= f.label :address %>
-                    <%= f.text_field :address %>
-                </div>
-
-                <div class="actions">
-                    <%= f.label :province, "Province" %>
-                    <%= f.collection_select :province_id, Province.all, :id, :name, prompt: "Select a province" %>
-                </div>
-
-                <div class="actions">
-                    <%= f.submit "Register" %>
-                </div>
-
-            </table>
-        <% end %>
+                </table>
+            <% end %>
+        </div>
     </div>
 </div>
