@@ -1,36 +1,37 @@
+<div style="min-height:93vh">
 
+    <div style="display: flex; padding-left:100px; padding-right:100px; ">
+        
+        <div>
+            <% if @product.image.attached? %>
+                <%= image_tag url_for(@product.image), style: "width: 400px; height:auto;", alt: @product.name %>
+            <% else %>
+                <%= image_tag "", alt: "No image" %>
+            <% end %>
+        </div>
+        <div>
+            <h1 style="font-size: 50px ; font-weight: bold"><%= @product.name %></h1>
+            <p style="font-size: 27px ; font-weight: bold">Price: <%= number_to_currency(@product.price) %></p>
+            <% if @product.in_stock %>
+                <p style="font-size: 27px; font-weight: bold">Status: <b style="color:green"> In Stock</b></p>
+            <% else %>
+                <p style="font-size: 27px; font-weight: bold">Status: <b style="color: red">Out of stock</b></p> 
+            <% end %>
+            <p style="font-size: 27px ; font-weight: bold">Category: <%= @product.category.name %></p>
 
-<div style="display: flex; padding-left:100px; padding-right:100px">
-    
-    <div>
-        <% if @product.image.attached? %>
-            <%= image_tag url_for(@product.image), style: "width: 400px; height:auto;", alt: @product.name %>
-        <% else %>
-            <%= image_tag "", alt: "No image" %>
-        <% end %>
+            <%= form_with url: addtocart_path(@product.id), class: "control", method: :get, local: true , data: { turbo: false } do |f| %>
+                <div class="actions">
+                    <%= f.label :Quantity, style:"font-size: 27px ; font-weight: bold" %>
+                    <%= f.number_field :quantity, style:"width:65px", value:"1", min:"1"%>
+                </div>
+                <br>
+                
+                <button class="button is-medium" style="margin-top:10px; color: white; font-weight: bold">Add To Cart</button>
+            <% end %>
+        </div>
     </div>
-    <div>
-        <h1 style="font-size: 50px ; font-weight: bold"><%= @product.name %></h1>
-        <p style="font-size: 27px ; font-weight: bold">Price: <%= number_to_currency(@product.price) %></p>
-        <% if @product.in_stock %>
-            <p style="font-size: 27px; font-weight: bold">Status: <b style="color:green"> In Stock</b></p>
-        <% else %>
-            <p style="font-size: 27px; font-weight: bold">Status: <b style="color: red">Out of stock</b></p> 
-        <% end %>
-        <p style="font-size: 27px ; font-weight: bold">Category: <%= @product.category.name %></p>
-
-        <%= form_with url: addtocart_path(@product.id), class: "control", method: :get, local: true , data: { turbo: false } do |f| %>
-            <div class="actions">
-                <%= f.label :Quantity, style:"font-size: 27px ; font-weight: bold" %>
-                <%= f.number_field :quantity, style:"width:65px", value:"1", min:"1"%>
-            </div>
-            <br>
-            
-            <button class="button is-medium" style="margin-top:10px; color: white; font-weight: bold">Add To Cart</button>
-        <% end %>
+    <h1 style="font-size: 50px ; font-weight: bold">Description:</h1>
+    <div style="padding:50px">
+        <p style="font-size: 20px ; font-weight: bold"><%= @product.description %></p>
     </div>
-</div>
-<h1 style="font-size: 50px ; font-weight: bold">Description:</h1>
-<div style="padding:50px">
-    <p style="font-size: 40px ; font-weight: bold"><%= @product.description %></p>
 </div>
