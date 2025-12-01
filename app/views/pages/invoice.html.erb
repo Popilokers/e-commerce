@@ -38,10 +38,12 @@
         <p  style="color: #1f2f57ff;margin-right:8px">GST <%=BigDecimal(session[:province_gst].to_s)*100%>% <%=gst%></p>
         <p  style="color: #1f2f57ff;margin-right:8px">HST <%=BigDecimal(session[:province_hst].to_s)*100%>% <%=hst%></p>
         <br>
-        <p  class="title is-5" style="color: #1c4ecdff; margin-right:8px">
+        <p  class="title is-5" style="color: #1c4ecdff; margin-right:8px"  id="total-info" data-grandtotal="<%= grandtotal %>">
           Grand Total: $<%= grandtotal %>
         </p>
-        <%= button_to "Proceed to Checkout", invoice_path, method: :get %>
+        <%#= button_to "Checkout", invoice_path, method: :get %>
+        
+        <div id="paypal"></div>
       </div>
     <% end %>
 </div>

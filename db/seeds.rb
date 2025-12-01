@@ -41,25 +41,26 @@
 
 # puts "Seeding Products Complete. Total Products: #{Product.count}"
 
-require 'csv'
+# https://books.toscrape.com/index.html
+# require 'csv'
 
-# read .csv files
+# # read .csv files
 
-# https://www.datablist.com/learn/csv/download-sample-csv-files#products-dataset
-books_csv = Rails.root.join('db/books.csv')
+# # https://www.datablist.com/learn/csv/download-sample-csv-files#products-dataset
+# books_csv = Rails.root.join('db/books.csv')
 
 
-CSV.foreach(books_csv, headers: true) do |product|
-  puts "Seeding Product: #{product.to_h}"
-  in_stock = product["Availability"].downcase.strip == "in stock"
-    Product.create!(
-      name: product["Title"],
-      price: product["Price"].to_f,
-      in_stock: in_stock,
-      stock_quantity: rand(1..100),
-      category_id: 2 
-    )
-end
+# CSV.foreach(books_csv, headers: true) do |product|
+#   puts "Seeding Product: #{product.to_h}"
+#   in_stock = product["Availability"].downcase.strip == "in stock"
+#     Product.create!(
+#       name: product["Title"],
+#       price: product["Price"].to_f,
+#       in_stock: in_stock,
+#       stock_quantity: rand(1..100),
+#       category_id: 2 
+#     )
+# end
 
-puts "Seeding Products Complete. Total Products: #{Product.count}"
+# puts "Seeding Products Complete. Total Products: #{Product.count}"
 
