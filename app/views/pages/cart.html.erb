@@ -27,21 +27,21 @@
 
       </table>
       <% subtotal = @cart_items.sum { |item| item[:product].price * item[:quantity] }%>
-      <% pst = 0%>
-      <% gst = 0%>
-      <% hst = 0%>
+      <% pst = subtotal * BigDecimal(session[:province_pst].to_s) %>
+      <% gst = subtotal * BigDecimal(session[:province_gst].to_s) %>
+      <% hst = subtotal * BigDecimal(session[:province_hst].to_s) %>
+      <% grandtotal = subtotal + gst + pst + hst%>
 
         <%= button_to "Refresh Cart", cart_path, method: :get %>
       <div style="display:flex; flex-direction:column; align-items:flex-end; margin-right:230px">
-        <p>subtotal: <%=subtotal%></p>
-
-        <% if session[:customer_province]["code"] == "NL" %>
-        <%else %>
-          <p>DIDNT WORK</p>
-        <%end%>
-
-        <p style="margin-right:9px">
-          Estimated Total: $<%= subtotal %>
+        <p  class="title is-5" style="color: #1c4ecdff;">SubTotal: <%=subtotal%></p>
+        <br>
+        <p style="color: #1c4ecdff;margin-right:8px">PST <%=BigDecimal(session[:province_pst].to_s)*100%>% <%=pst%></p>
+        <p   style="color: #1c4ecdff;margin-right:8px">GST <%=BigDecimal(session[:province_gst].to_s)*100%>% <%=gst%></p>
+        <p   style="color: #1c4ecdff;margin-right:8px">HST <%=BigDecimal(session[:province_hst].to_s)*100%>% <%=hst%></p>
+        <br>
+        <p  class="title is-5" style="color: #1c4ecdff; margin-right:8px">
+          Grand Total: $<%= grandtotal %>
         </p>
         <%= button_to "Proceed", invoice_path, method: :get %>
       </div>

@@ -14,7 +14,10 @@ class PagesController < ApplicationController
       session[:customer_email] = @customer.email   # store customer ID in session
       session[:customer_id] = @customer.id   # store customer ID in session
       session[:customer_address] = @customer.address   # store customer ID in session
-      session[:customer_province] = @customer.province_id.province.code   # store customer ID in session
+      session[:customer_province] = @customer.province.code  # store customer ID in session
+      session[:province_gst] = @customer.province.gst  # store customer ID in session
+      session[:province_pst] = @customer.province.pst  # store customer ID in session
+      session[:province_hst] = @customer.province.hst  # store customer ID in session
       session[:cart] ||= []
 
       flash[:notice] = "Login successful"

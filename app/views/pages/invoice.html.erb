@@ -1,31 +1,47 @@
 
 
-<div style="border: 2px solid red; padding:50px; "><h2>Your Cart</h2>
+<div style=" padding:50px; height:93vh; max-height: 93vh;"><h2>Your Invoice</h2>
     <% if @cart_items.empty? %>
       <p>Your cart is empty.</p>
     <% else %>
       <table>
         <tr>
-            <th>Product</th>
-            <th>Quantity</th>
-            <th>Price</th>
+            <th class="title is-3" style="color: #1c4ecdff;">Product</th>
+            <th class="title is-3" style="color: #1c4ecdff;">Quantity</th>
+            <th class="title is-3" style="color: #1c4ecdff;">Unit Price</th>
+            <th class="title is-3" style="color: #1c4ecdff;">Price</th>
         </tr>
     <% @cart_items.each_with_index do |item, index| %>
             <% if item[:product] %>
                 <tr>
                     <td class="cart-row"><%= item[:product].name %> </td>
-                    <td  class="cart-row"><%= item[:quantity] %></td>
+                    <td class="cart-row"><%= item[:quantity] %></td>
                     <td  class="cart-row">$<%= item[:product].price %></td>
+                    <td  class="cart-row">$<%= item[:product].price * item[:quantity] %></td>
+                    <td  class="cart-row" style="width: 10px;">
+                    </td>
                 </tr>
             <% end %>
         <% end %>
 
       </table>
-      <div style="display:flex; flex-direction:column; align-items:flex-end; margin-right:160px">
-        <p style="margin-right:15px">
-          Total: $<%= @cart_items.sum { |item| item[:product].price * item[:quantity] } %>
+      <% subtotal = @cart_items.sum { |item| item[:product].price * item[:quantity] }%>
+      <% pst = subtotal * BigDecimal(session[:province_pst].to_s) %>
+      <% gst = subtotal * BigDecimal(session[:province_gst].to_s) %>
+      <% hst = subtotal * BigDecimal(session[:province_hst].to_s) %>
+      <% grandtotal = subtotal + gst + pst + hst%>
+
+      <div style="display:flex; flex-direction:column; align-items:flex-end; margin-right:180px">
+        <p  class="title is-5" style="color: #1c4ecdff;">SubTotal: <%=subtotal%></p>
+        <br>
+        <p style="color: #1f2f57ff;margin-right:8px">PST <%=BigDecimal(session[:province_pst].to_s)*100%>% <%=pst%></p>
+        <p  style="color: #1f2f57ff;margin-right:8px">GST <%=BigDecimal(session[:province_gst].to_s)*100%>% <%=gst%></p>
+        <p  style="color: #1f2f57ff;margin-right:8px">HST <%=BigDecimal(session[:province_hst].to_s)*100%>% <%=hst%></p>
+        <br>
+        <p  class="title is-5" style="color: #1c4ecdff; margin-right:8px">
+          Grand Total: $<%= grandtotal %>
         </p>
-        <%= button_to "Checkout", checkout_path, method: :get %>
+        <%= button_to "Proceed", invoice_path, method: :get %>
       </div>
     <% end %>
 </div>

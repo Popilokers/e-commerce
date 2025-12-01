@@ -30,7 +30,7 @@ class ProductController < ApplicationController
   end
 
   def addToCart
-    session[:cart] ||= []
+    session[:cart] ||=[]
     @product = Product.find(params[:id])
     flash[:notice] = "#{@product.name} added to cart!"
     session[:cart] << { product_id: @product.id, quantity: params[:quantity].to_i }
