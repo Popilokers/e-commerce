@@ -6,7 +6,7 @@ class CouponWallet < ApplicationRecord
     ["id", "customer_id", "coupon_id", "amount"]
   end
 
-  validates :customer_id, presence:true
-  validates :coupon_id, presence:true, is_numeric:true
-  validates :amount, presence:true, numericality:{greater_than_or_equal_to:0}, is_numeric:true
+  validates :customer_id, presence:true, numericality:{only_integer: true,greater_than_or_equal_to:0}
+  validates :coupon_id, presence:true, numericality:{only_integer: true,greater_than_or_equal_to:0}
+  validates :amount, presence:true, numericality:{only_integer: true,greater_than_or_equal_to:0}
 end 

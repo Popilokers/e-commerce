@@ -5,5 +5,5 @@ class Order < ApplicationRecord
   end
 
   
-  validates :customer_id, presence:true,numericality:{greater_than: 0}, is_numeric:true
+  validates :customer_id, presence:true,numericality:{only_integer: true,greater_than: 0}
 end

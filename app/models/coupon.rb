@@ -4,6 +4,6 @@ class Coupon < ApplicationRecord
   end
 
   validates :name, presence: true
-  validates :cost, presence: true, numericality:{greater_than: 0}, is_numeric:true
+  validates :cost, presence: true, numericality:{only_integer: true,greater_than: 0}
 end
 

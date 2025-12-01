@@ -8,7 +8,7 @@ class Product < ApplicationRecord
   
   validates :name, presence:true
   validates :description, presence:true
-  validates :price, presence:true, numericality:{greater_than:0}, is_numeric:true
-  validates :in_stock, presence:true, is_boolean:true
-  validates :category_id, presence:true,numericality:{greater_than:0}, is_numeric:true
+  validates :price, presence:true, numericality:{only_integer: true,greater_than:0}
+  validates :in_stock, presence:true, inclusion: { in: [true, false] }
+  validates :category_id, presence:true,numericality:{only_integer: true,greater_than:0}
 end
