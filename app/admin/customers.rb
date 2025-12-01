@@ -5,7 +5,7 @@ ActiveAdmin.register Customer do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  permit_params :first_name, :last_name, :email, :cardnumber, :points, :address,:province
+  permit_params :first_name, :last_name, :email, :cardnumber, :points, :address,:province_id, :password
 
 
   filter :first_name
@@ -30,6 +30,9 @@ ActiveAdmin.register Customer do
     column :last_name
     column :email
     column :cardnumber
+    column "Province" do |customer|
+      customer.province.code
+    end
     actions
   end
 
@@ -38,7 +41,7 @@ ActiveAdmin.register Customer do
       f.input :first_name
       f.input :last_name
       f.input :address
-      f.input :province
+      f.input :province_id
       f.input :email
       if f.object.new_record?
         f.input :password
@@ -57,6 +60,9 @@ ActiveAdmin.register Customer do
       row :password_digest
       row :cardnumber
       row :points
+      row "Province" do |customer|
+        customer.province.code
+      end
     end
   end
 end

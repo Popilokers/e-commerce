@@ -14,7 +14,7 @@ class PagesController < ApplicationController
       session[:customer_email] = @customer.email   # store customer ID in session
       session[:customer_id] = @customer.id   # store customer ID in session
       session[:customer_address] = @customer.address   # store customer ID in session
-      session[:customer_province] = @customer.province   # store customer ID in session
+      session[:customer_province] = @customer.province_id.province.code   # store customer ID in session
       session[:cart] ||= []
 
       flash[:notice] = "Login successful"
@@ -91,6 +91,10 @@ class PagesController < ApplicationController
       quantity = item["quantity"]
       { product: product, quantity: quantity }
     end
+  end
+
+  def customer_info
+
   end
 
   def about

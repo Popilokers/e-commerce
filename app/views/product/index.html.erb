@@ -41,7 +41,7 @@
           <div class="content is-flex-grow-1">
             <p><strong><%=  product.name %></strong></p>
             <p><strong>Price: <%= product.price %></strong></p>
-            <% if product.stock_quantity > 0 %>
+            <% if product.in_stock %>
                 <p style="font-size: 25px; color: #11ff00ff; -webkit-text-stroke: 1px black; " ><b >In Stock</b></p>
             <% else %>
                 <p style="font-size: 25px; color: #ff0000ff; -webkit-text-stroke: 1px black; "><b>Out of stock</b></p> 

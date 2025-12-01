@@ -15,7 +15,7 @@
             <% if item[:product] %>
                 <tr>
                     <td class="cart-row"><%= item[:product].name %> </td>
-                    <td class="cart-row"><input class="cart-qty" data-index="<%= index %>" type="number" value="<%= item[:quantity] %>" style="width:67px" min="1" max="<%=item[:product].stock_quantity%>"></td>
+                    <td class="cart-row"><input class="cart-qty" data-index="<%= index %>" type="number" value="<%= item[:quantity] %>" style="width:67px" min="1"></td>
                     <td  class="cart-row">$<%= item[:product].price %></td>
                     <td  class="cart-row">$<%= item[:product].price * item[:quantity] %></td>
                     <td  class="cart-row" style="width: 10px;">
@@ -26,11 +26,22 @@
         <% end %>
 
       </table>
-      
+      <% subtotal = @cart_items.sum { |item| item[:product].price * item[:quantity] }%>
+      <% pst = 0%>
+      <% gst = 0%>
+      <% hst = 0%>
+
         <%= button_to "Refresh Cart", cart_path, method: :get %>
       <div style="display:flex; flex-direction:column; align-items:flex-end; margin-right:230px">
-        <p style="margin-right:60px">
-          Total: $<%= @cart_items.sum { |item| item[:product].price * item[:quantity] } %>
+        <p>subtotal: <%=subtotal%></p>
+
+        <% if session[:customer_province]["code"] == "NL" %>
+        <%else %>
+          <p>DIDNT WORK</p>
+        <%end%>
+
+        <p style="margin-right:9px">
+          Estimated Total: $<%= subtotal %>
         </p>
         <%= button_to "Proceed", invoice_path, method: :get %>
       </div>

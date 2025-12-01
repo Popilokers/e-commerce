@@ -3,6 +3,6 @@ class Product < ApplicationRecord
   has_one_attached :image
 
   def self.ransackable_attributes(auth_object = nil)
-    [ "id", "name", "description", "price", "stock_quantity", "category_id" ]
+    [ "id", "name", "description", "price", "in_stock", "category_id" ]
   end
 end

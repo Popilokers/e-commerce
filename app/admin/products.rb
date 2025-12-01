@@ -4,13 +4,13 @@ ActiveAdmin.register Product do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  permit_params :name, :description, :price, :stock_quantity, :category_id, :image
+  permit_params :name, :description, :price, :in_stock, :category_id, :image
 
 
   filter :name
   filter :description
   filter :price
-  filter :stock_quantity
+  filter :in_stock
   filter :category_id
 
  # filter :image_attached, as: :boolean, label: "Has Image?"  # Rails 6+ ActiveStorage
@@ -28,7 +28,7 @@ ActiveAdmin.register Product do
     f.inputs do
       f.input :name
       f.input :description
-      f.input :stock_quantity
+      f.input :in_stock
       f.input :price
       f.input :category_id
       # Upload field
@@ -46,7 +46,7 @@ ActiveAdmin.register Product do
     id_column
     column :name
     column :description
-    column :stock_quantity
+    column :in_stock
     column :price
     column "Category" do |product|
       product.category.name  # display the name instead of category_id
@@ -59,7 +59,7 @@ ActiveAdmin.register Product do
       row :name
       row :description
       row :price
-      row :stock_quantity
+      row :in_stock
       row "Category" do |product|
         product.category.name  # display the name instead of category_id
       end
