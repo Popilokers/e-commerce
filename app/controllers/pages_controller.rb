@@ -80,7 +80,9 @@ class PagesController < ApplicationController
       end
   end
 
-  
+  def checkout
+
+  end
 
   def invoice
     # session[:cart] might be nil the first time, so we default to empty array

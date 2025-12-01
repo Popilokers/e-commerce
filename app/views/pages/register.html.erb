@@ -2,42 +2,43 @@
     <h1 class="title is-1" style="color: #1c4ecdff;">Register</h1>
     <div style="border: 2px solid red; display:flex; justify-content:center; align-items:center; margin:150px; margin-top:50px;">
         <%= form_with model: (@customer || Customer.new), local: true do |f| %>
-        
-            <div class="actions">
-                <%= f.label :first_name %>
-                <%= f.text_field :first_name %>
-            </div>
+            <table>
+                <div class="actions">
+                    
+                    <%= f.label :first_name %>
+                    <%= f.text_field :first_name %>
+                </div>
 
-            <div class="actions">
-                <%= f.label :last_name %>
-                <%= f.text_field :last_name %>
-            </div>
+                <div class="actions">
+                    <%= f.label :last_name %>
+                    <%= f.text_field :last_name %>
+                </div>
 
-            <div class="actions">
-                <%= f.label :email %>
-                <%= f.email_field :email %>
-            </div>
+                <div class="actions">
+                    <%= f.label :email %>
+                    <%= f.email_field :email %>
+                </div>
+                
+                <div class="actions">
+                    <%= f.label :password %>
+                    <%= f.password_field :password %>
+                </div> 
 
-            <div class="actions">
-                <%= f.label :address %>
-                <%= f.text_field :address %>
-            </div>
+                <div class="actions">
+                    <%= f.label :address %>
+                    <%= f.text_field :address %>
+                </div>
 
-            <div class="actions">
-                <%= f.label :province %>
-                <%= f.text_field :province %>
-            </div>
+                <div class="actions">
+                    <%= f.label :province %>
+                    <%= f.text_field :province %>
+                </div>
 
-            <div class="actions">
-                <%= f.label :password %>
-                <%= f.password_field :password %>
-            </div> 
+                <div class="actions">
+                    <%= f.submit "Register" %>
+                </div>
 
-            <div class="actions">
-                <%= f.submit "Register" %>
-            </div>
-
-        
+            </table>
         <% end %>
     </div>
 </div>

@@ -14,7 +14,8 @@ Rails.application.routes.draw do
   get "pages/cart", to: "pages#cart", as: "cart"
   delete "pages/cart", to: "pages#removeFromCart", as: "remove"
   patch "/cart/update_quantity", to: "pages#update_quantity"
-  get "pages/cart/invoice", to: "pages#invoice", as: "invoice"
+  get "/cart/checkout", to: "pages#checkout", as: "checkout"
+  get "pages/cart/checkout/invoice", to: "pages#invoice", as: "invoice"
   get "pages/about"
   get "pages/contact"
 

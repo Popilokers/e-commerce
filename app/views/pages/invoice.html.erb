@@ -25,7 +25,7 @@
         <p style="margin-right:15px">
           Total: $<%= @cart_items.sum { |item| item[:product].price * item[:quantity] } %>
         </p>
-        <%= button_to "Checkout", invoice_path, method: :get %>
+        <%= button_to "Checkout", checkout_path, method: :get %>
       </div>
     <% end %>
 </div>
