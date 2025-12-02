@@ -29,7 +29,7 @@ ActiveAdmin.register Product do
       f.input :name
       f.input :description
       f.input :in_stock
-      f.input :price
+      f.input :price, min: 0.0001
       f.input :category_id
       # Upload field
       f.input :image, as: :file, hint: (

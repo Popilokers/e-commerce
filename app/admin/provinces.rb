@@ -18,9 +18,9 @@ ActiveAdmin.register Province do
     f.inputs do
       f.input :name
       f.input :code
-      f.input :gst
-      f.input :pst
-      f.input :hst
+      f.input :gst, max: 1
+      f.input :pst, max: 1
+      f.input :hst, max: 1
     end
     f.actions
   end
