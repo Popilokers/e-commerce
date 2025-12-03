@@ -4,73 +4,56 @@
 
         <div style="width:800px;border: 7px solid #122e74ff; border-radius:10px; padding:10px; display:flex; justify-content:center; align-items:center; ">
             
-            <%= form_with model: (@customer || Customer.new), local: true do |f| %>
-            
-                        <p style="color:red"><%=flash[:alert]%></p>
-                <table>
-                    <div class="actions">
-                        <tr>
-                            <td><%= f.label :first_name %></td>
-                            <td><%= f.text_field :first_name ,style:"width:225px"%></td>
-                        </tr>
-                        
-                        
-                    </div>
+            <form action=<%=create_customer_path%> method="post">
+                <!-- Rails authenticity token (required unless you disabled CSRF protection) -->
+                <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
 
-                    <div class="actions">
-                        <tr>
-                            <td><%= f.label :last_name %></td>
-                            <td> <%= f.text_field :last_name ,style:"width:225px"%></td>
-                        </tr>
-                        
-                       
-                    </div>
+                <p style="color:red"><%= flash[:alert] %></p>
 
-                    <div class="actions">
-                        <tr>
-                            <td><%= f.label :email %></td>
-                            <td><%= f.email_field :email ,style:"width:225px" %></td>
-                        </tr>
-                        
-                        
-                    </div>
+<table>
+        <tr>
+            <td><label for="customer_first_name">First name</label></td>
+            <td><input type="text" id="customer_first_name" name="customer[first_name]" style="width:225px"></td>
+        </tr>
 
-                    <div class="actions">
-                        
-                        <tr>
-                            <td><%= f.label :password %></td>
-                            <td><%= f.password_field :password ,style:"width:225px" %></td>
-                        </tr>
-                        
-                    </div> 
-                    
-                    <div class="actions">
-                        <tr>
-                            <td><%= f.label :address %></td>
-                            <td><%= f.text_field :address ,style:"width:225px" %></td>
-                        </tr>
-                        
-                        
-                    </div>
+        <tr>
+            <td><label for="customer_last_name">Last name</label></td>
+            <td><input type="text" id="customer_last_name" name="customer[last_name]" style="width:225px"></td>
+        </tr>
 
-                    <div class="actions">
-                        <tr>
-                            <td><%= f.label :province, "Province" %></td>
-                            <td><%= f.collection_select :province_id, Province.all, :id, :name, prompt: "Select a province" %></td>
-                        </tr>
-                        
-                        
-                    </div>
+        <tr>
+            <td><label for="customer_email">Email</label></td>
+            <td><input type="email" id="customer_email" name="customer[email]" style="width:225px"></td>
+        </tr>
 
-                    <div class="actions">
-                        <tr>
-                            <td><%= f.submit "Register" %></td>
-                        </tr>
-                        
-                    </div>
+        <tr>
+            <td><label for="customer_password">Password</label></td>
+            <td><input type="password" id="customer_password" name="customer[password]" style="width:225px"></td>
+        </tr>
+
+        <tr>
+            <td><label for="customer_address">Address</label></td>
+            <td><input type="text" id="customer_address" name="customer[address]" style="width:225px"></td>
+        </tr>
+
+        <tr>
+            <td><label for="customer_province_id">Province</label></td>
+            <td>
+                <select id="customer_province_id" name="customer[province_id]">
+                    <option value="">Select a province</option>
+                    <% Province.all.each do |province| %>
+                        <option value="<%= province.id %>"><%= province.name %></option>
+                    <% end %>
+                </select>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><input type="submit" value="Register"></td>
+                    </tr>
 
                 </table>
-            <% end %>
+            </form>
         </div>
     </div>
 </div>

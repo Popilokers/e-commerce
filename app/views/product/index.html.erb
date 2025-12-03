@@ -1,67 +1,56 @@
-<h1 class="title is-1" style="color: #1c4ecdff;">Products</h1>
+<div style="min-height: 95vh;"><h1 class="title is-1" style="color: #1c4ecdff;">Products</h1>
 
 
-<% if flash[:notice] %>
-  <p class="notice"><%= flash[:notice] %></p>
-<% end %>
+  <% if flash[:notice] %>
+    <p class="notice"><%= flash[:notice] %></p>
+  <% end %>
 
-<% if flash[:alert] %>
-  <p class="alert"><%= flash[:alert] %></p>
-<% end %>
+  <% if flash[:alert] %>
+    <p class="alert"><%= flash[:alert] %></p>
+  <% end %>
 
-<h1>Logged in as: <%=session[:customer_email]%></h1>
-<style>
-  table, th, td {
-    border: 1px solid black;
-    border-collapse: collapse; /* This makes sure borders are not doubled */
-  }
-  th, td {
-    padding: 8px;
-  }
-</style>
+  <div class="columns is-multiline">
+    <% @products.each do |product| %>
+      <div class="column is-4 is-flex">
 
+        <div class="box is-flex is-flex-direction-column is-flex-grow-1" style="background-color: #7e83b6ff">
 
- <div class="columns is-multiline">
-  <% @products.each do |product| %>
-    <div class="column is-4 is-flex">
+          <div class="is-flex">
+            <!-- IMAGE LEFT -->
+            <figure class="image is-128x128 mr-4">
+              <% if product.image.attached? %>
+                <%= image_tag url_for(product.image), style: "max-width: 100px; max-height:150px;", alt: product.name %>
+              <% else %>
+                <%= image_tag "", alt: "No image" %>
+              <% end %>
+            </figure>
 
-      <div class="box is-flex is-flex-direction-column is-flex-grow-1" style="background-color: #7e83b6ff">
+            <!-- TEXT RIGHT -->
+            <div class="content is-flex-grow-1">
+              <p><strong><%=  product.name %></strong></p>
+              <p><strong>Price: <%= product.price %></strong></p>
+              <% if product.in_stock %>
+                  <p style="font-size: 25px; color: #11ff00ff; -webkit-text-stroke: 1px black; " ><b >In Stock</b></p>
+              <% else %>
+                  <p style="font-size: 25px; color: #ff0000ff; -webkit-text-stroke: 1px black; "><b>Out of stock</b></p> 
+              <% end %>
 
-        <div class="is-flex">
-          <!-- IMAGE LEFT -->
-          <figure class="image is-128x128 mr-4">
-            <% if product.image.attached? %>
-              <%= image_tag url_for(product.image), style: "max-width: 100px; max-height:150px;", alt: product.name %>
-            <% else %>
-              <%= image_tag "", alt: "No image" %>
-            <% end %>
-          </figure>
-
-          <!-- TEXT RIGHT -->
-          <div class="content is-flex-grow-1">
-            <p><strong><%=  product.name %></strong></p>
-            <p><strong>Price: <%= product.price %></strong></p>
-            <% if product.in_stock %>
-                <p style="font-size: 25px; color: #11ff00ff; -webkit-text-stroke: 1px black; " ><b >In Stock</b></p>
-            <% else %>
-                <p style="font-size: 25px; color: #ff0000ff; -webkit-text-stroke: 1px black; "><b>Out of stock</b></p> 
-            <% end %>
-
-            <!-- Push Add button to bottom -->
-            <div class="mt-auto">
-              
-              <p><%= link_to "View Product", product_path(product), class: "button is-small" %>
-</p>
+              <!-- Push Add button to bottom -->
+              <div class="mt-auto">
+                
+                <p><%= link_to "View Product", product_path(product), class: "button is-small" %>
+  </p>
+              </div>
             </div>
           </div>
+
         </div>
-
       </div>
-    </div>
-  <% end %>
-  
-</div>
+    <% end %>
+    
+  </div>
 
-    <div class="is-flex is-justify-content-center" role="navigation" aria-label="pagination">
-      <%= paginate @products, params: { query: params[:query], category_id: params[:category_id] } %>
-    </div>
+      <div class="is-flex is-justify-content-center" role="navigation" aria-label="pagination">
+        <%= paginate @products, params: { query: params[:query], category_id: params[:category_id] } %>
+      </div>
+</div>

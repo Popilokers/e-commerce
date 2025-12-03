@@ -1,6 +1,6 @@
 
 
-<div style=" padding:50px; height:93vh; max-height: 93vh;"><h2><%=link_to "Your Cart", cart_path%></h2>
+<div style=" padding:50px; height:93vh; max-height: 93vh;"><h2>Your Cart >></h2>
     <% if @cart_items.empty? %>
       <p>Your cart is empty.</p>
     <% else %>
@@ -20,7 +20,9 @@
                     <td  class="cart-row">$<%= item[:price] %></td>
                     <td  class="cart-row">$<%= item[:price]*item[:quantity] %></td>
                     <td  class="cart-row" style="width: 10px;">
-                    <%= button_to "Delete", remove_path(index: index), method: :delete, data: { confirm: "Are you sure?" } %>
+                            <form action="<%= remove_path(index: index) %>" method="post" style="display:inline;">
+  <button type="submit">Delete</button>
+</form>
                     </td>
                 </tr>
             <% end %>
@@ -35,28 +37,43 @@
       <% grandtotal = subtotal + gst + pst + hst%>
       <% session[:cart_total] = grandtotal%>
 
-      <%= form_with url: update_province_path, method: :get, local: true do %>
-        <%= select_tag :province_id,
-          options_from_collection_for_select(
-            Province.all, :id, :name, session[:province_id]
-          ),
-          id: "provinces", onchange: "this.form.submit();" %>
-      <% end %>
+<form action="<%= update_province_path %>" method="get" id="province_form">
+  <select name="province_id" id="provinces" onchange="this.form.submit();">
+    <% Province.all.each do |province| %>
+      <option value="<%= province.id %>" <%= "selected" if province.id == session[:province_id] %>>
+        <%= province.name %>
+      </option>
+    <% end %>
+  </select>
+</form>
 
                     
-        <%= button_to "Refresh Cart", cart_path, method: :get %>
+        <form action="<%= cart_path %>" method="get" style="display:inline;">
+  <button type="submit">Refresh Cart</button>
+</form>
 
-      <div style="display:flex; flex-direction:column; align-items:flex-end; margin-right:230px">
-        <p  class="title is-5" style="color: #1c4ecdff;">SubTotal: <%=subtotal%></p>
-        <br>
-        <p style="color: #1c4ecdff;margin-right:8px">PST <%=BigDecimal(session[:province_pst].to_s)*100%>% <%=pst%></p>
-        <p   style="color: #1c4ecdff;margin-right:8px">GST <%=BigDecimal(session[:province_gst].to_s)*100%>% <%=gst%></p>
-        <p   style="color: #1c4ecdff;margin-right:8px">HST <%=BigDecimal(session[:province_hst].to_s)*100%>% <%=hst%></p>
-        <br>
-        <p  class="title is-5" style="color: #1c4ecdff; margin-right:8px">
-          Grand Total: $<%= grandtotal %>
-        </p>
-        <%= button_to "Proceed", invoice_path, method: :get %>
-      </div>
+      <!-- Totals Display -->
+<div style="display:flex; flex-direction:column; align-items:flex-end; margin-right:230px">
+  <p class="title is-5" style="color: #1c4ecdff;">SubTotal: <%= subtotal %></p>
+  <br>
+  <p style="color: #1c4ecdff;margin-right:8px">
+    PST <%= BigDecimal(session[:province_pst].to_s) * 100 %>% <%= pst %>
+  </p>
+  <p style="color: #1c4ecdff;margin-right:8px">
+    GST <%= BigDecimal(session[:province_gst].to_s) * 100 %>% <%= gst %>
+  </p>
+  <p style="color: #1c4ecdff;margin-right:8px">
+    HST <%= BigDecimal(session[:province_hst].to_s) * 100 %>% <%= hst %>
+  </p>
+  <br>
+  <p class="title is-5" style="color: #1c4ecdff; margin-right:8px">
+    Grand Total: $<%= grandtotal %>
+  </p>
+
+  <!-- Proceed Button -->
+  <form action="<%= invoice_path %>" method="get">
+    <button type="submit">Proceed</button>
+  </form>
+</div>
     <% end %>
 </div>

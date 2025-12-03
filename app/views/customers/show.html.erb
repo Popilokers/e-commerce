@@ -2,31 +2,31 @@
 
 
     <h1 class="title is-1" style="color: #1c4ecdff;">Customer</h1>
+    
     <div style="display:flex; justify-content:center; align-items:center;">
         <div style="width:800px;border: 7px solid #122e74ff; border-radius:10px; padding:25px; display:flex; justify-content:center; align-items:center; ">
            
-    
-    <%# <h1>logged in as: <%=@customer.id %></h1>
+    <%# <h1>logged in as: <%=@customer.id %>
         <% if session[:customer_id] == @customer.id%>
         <table>
             <tr class="cart-row">
-                <td>Full name</h1>
+                <td>Full name</td>
                 <td><%=session[:customer_full]%></td>
             </tr>
             <tr class="cart-row">
-                <td>Email Address</h1>
+                <td>Email Address</td>
                 <td><%=session[:customer_email]%></td>
             </tr>
             <tr class="cart-row">
-                <td>Address</h1>
+                <td>Address</td>
                 <td><%=session[:customer_Address]||"No address"%></td>
             </tr>
             <tr class="cart-row">
-                <td>Province </h1>
+                <td>Province </td>
                 <td><%=session[:customer_province]%></td>
             </tr>
             <tr class="cart-row">
-                <td>Points</h1>
+                <td>Points</td>
                 <td><%=session[:customer_points]%></td>
             </tr>
         </table>
@@ -39,7 +39,7 @@
         <div style="width:800px;border: 7px solid #122e74ff; border-radius:10px; padding:25px; display:flex; justify-content:center; align-items:center; ">
            
     
-    <%# <h1>logged in as: <%=@customer.id %></h1>
+    <%# <h1>logged in as: <%=@customer.id %>
         <% if session[:customer_id] == @customer.id%>
         <table>
             <tr>

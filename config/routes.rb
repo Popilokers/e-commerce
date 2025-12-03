@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  get "customer/:id/order/:order_id", to: "order_items#show"
+
+  get "customer/:id/order/:orderid", to: "order_items#show", as: "receipt"
 
   post 'create_checkout_session', to: 'payments#create_checkout_session'
   get 'success', to: 'payments#success'
@@ -8,9 +9,12 @@ Rails.application.routes.draw do
 
   get "product", to: "product#index", as: "products_index"
   get "product/:id", to: "product#show", as: "product"
+  get "customer/:customerid/order/:orderid/product/:id", to: "product#show", as: "receipt_view_product"
   get "product/:id/addtocart", to: "product#addToCart", as: "addtocart"
 
   get "customer/:id", to: "customers#show", as: "customer"
+  post "customer/create", to: "customers#create", as: "create_customer"
+
   resources :customers, only: [:new, :create, :show]
 
   get "pages/login", to: "pages#login", as: "login"
@@ -18,13 +22,13 @@ Rails.application.routes.draw do
   get "pages/logout", to: "pages#logout", as: "logout"
   get "pages/register", to: "pages#register", as: "register"
   get "pages/cart", to: "pages#cart", as: "cart"
-  delete "pages/cart", to: "pages#removeFromCart", as: "remove"
+  post "pages/cart", to: "pages#removeFromCart", as: "remove"
   patch "/cart/update_quantity", to: "pages#update_quantity"
   get "cart/update_province", to: "pages#update_province", as: "update_province"
   get "/cart/invoice/checkout", to: "pages#checkout", as: "checkout"
   get "pages/cart/invoice", to: "pages#invoice", as: "invoice"
-  get "pages/about"
-  get "pages/contact"
+  get "pages/about", to: "pages#about", as: "about"
+  get "pages/contact", to: "pages#contact", as: "contact"
 
 
 resources :products

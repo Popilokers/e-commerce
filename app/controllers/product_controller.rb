@@ -27,6 +27,14 @@ class ProductController < ApplicationController
 
   def show
     @product = Product.find(params[:id])
+    
+      if params[:customerid].present? && params[:orderid].present?
+        @customer = Customer.find(params[:customerid])
+        @order = Order.find(params[:orderid])
+        @mode = :order_context
+      else
+        @mode = :product_context
+      end
   end
 
   def addToCart

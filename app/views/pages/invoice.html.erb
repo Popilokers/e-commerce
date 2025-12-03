@@ -1,6 +1,6 @@
 
 
-<div style=" padding:50px; height:93vh; max-height: 93vh;"><h2><%=link_to "Your Cart", cart_path%>>><%=link_to "Invoice", invoice_path%>>></h2>
+<div style=" padding:50px; height:93vh; max-height: 93vh;"><h2><%=link_to "Your Cart", cart_path%> >> Invoice >></h2>
     <% if @cart_items.empty? %>
       <p>Your cart is empty.</p>
     <% else %>
@@ -41,8 +41,12 @@
         <p  class="title is-5" style="color: #1c4ecdff; margin-right:8px">
           Grand Total: $<%= grandtotal %>
         </p>
-        <%= button_to "Checkout with Stripe", create_checkout_session_path, method: :post,data: { turbo: false } %>
-        
+
+<form action="<%= create_checkout_session_path %>" method="post" data-turbo="false">
+<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+  <button type="submit">Checkout with Stripe</button>
+</form>
+
       </div>
     <% end %>
 </div>

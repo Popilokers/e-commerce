@@ -1,5 +1,7 @@
 <div style="min-height:93vh">
-
+<%if @mode == :order_context%>
+    <h1><%=link_to "Order", customer_path(session[:customer_id])%>>><%=link_to "Receipt", receipt_path(@customer.id,@order.id)%>>>Product</h1>
+<%end%>
     <div style="display: flex; padding-left:100px; padding-right:100px; ">
         
         <div>
@@ -19,22 +21,25 @@
             <% end %>
             <p style="font-size: 27px ; font-weight: bold">Category: <%= @product.category.name %></p>
 
-
+        
             <% url = ""
             if session[:customer_id]
                 url = addtocart_path(@product.id)
             else
                 url = login_path
             end%>
-            <%= form_with url: url, class: "control", method: :get, local: true , data: { turbo: false } do |f| %>
-                <div class="actions">
-                    <%= f.label :Quantity, style:"font-size: 27px ; font-weight: bold" %>
-                    <%= f.number_field :quantity, style:"width:65px", value:"1", min:"1"%>
-                </div>
-                <br>
-                
-                <button class="button is-medium" style="margin-top:10px; color: white; font-weight: bold">Add To Cart</button>
-            <% end %>
+            <%if @mode == :product_context%>
+            
+                <%= form_with url: url, class: "control", method: :get, local: true , data: { turbo: false } do |f| %>
+                    <div class="actions">
+                        <%= f.label :Quantity, style:"font-size: 27px ; font-weight: bold" %>
+                        <%= f.number_field :quantity, style:"width:65px", value:"1", min:"1"%>
+                    </div>
+                    <br>
+                    
+                    <button class="button is-medium" style="margin-top:10px; color: white; font-weight: bold">Add To Cart</button>
+                <% end %>
+            <%end%>
         </div>
     </div>
     <h1 style="font-size: 50px ; font-weight: bold">Description:</h1>

@@ -1,3 +1,35 @@
-<h1>OrderItems<%=@order.id%></h1>
-<p>Find me in app/views/order_items/show.html.erb</p>
 
+
+<div style="height: 93.55vh; ">
+
+
+    <h1 class="title is-1" style="color: #1c4ecdff;">Order ID #<%=@order.id%></h1>
+    <h1><%=link_to "Orders", customer_path(session["customer_id"])%>>></h1>
+    <h1>Number of items: <%= @items.size %></h1>
+<div style="display:flex; justify-content:center; align-items:center;">
+        <div style="width:800px;border: 7px solid #122e74ff; border-radius:10px; padding:25px; display:flex; justify-content:center; align-items:center; ">
+           
+    
+        <% if session[:customer_id] == @customer.id%>
+            <table>
+                <tr>
+                    <th style="color: #1c4ecdff;">Product Name</th>
+                    <th style="color: #1c4ecdff;">Quantity</th>
+                    <th style="color: #1c4ecdff;">Unit Price</th>
+                    <th style="color: #1c4ecdff;">Cost</th>
+                </tr>
+                <% @items.each do |item|%>
+                    <tr class="cart-row" onclick="window.location=window.location.href + '/product/<%= item.product_id %>';">
+
+                        <td><%=item.product.name%></td>
+                        <td><%=item.quantity%></td>
+                        <td><%=item.unit_price.to_f%></td>
+                        <td><%=item.quantity.to_f * item.unit_price.to_f%></td>
+                    </tr>
+                    
+                <%end%>
+            </table>
+        <%end%>
+        </div>
+    </div>
+</div>
