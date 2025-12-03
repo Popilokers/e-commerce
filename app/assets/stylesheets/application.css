@@ -17,5 +17,14 @@
 
 .cart-row{
     border-top: 2px solid grey;
-    
+}
+
+
+.cart-row:hover
+{
+    background-color: #c5c0c07d;   
+}
+.cart-row:hover td {
+    color: #302d2dff;  
+    cursor: pointer;
 }

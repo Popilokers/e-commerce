@@ -14,14 +14,14 @@ ActiveAdmin.register Order do
     column :gst
     column :hst
     column :status do |order|
-  case order.status
-  when 0
-    "Not Ready"
-  when 1
-    "Ready for Pickup"
-  when 2
-    "Picked up"
-  end
+      case order.status
+      when 0
+        "Not Ready"
+      when 1
+        "Ready for Pickup"
+      when 2
+        "Picked up"
+      end
     end
     actions
   end
@@ -30,6 +30,9 @@ ActiveAdmin.register Order do
 
   form do |f|
     f.inputs do
+      f.input :pst, min:0,max:1
+      f.input :gst, min:0,max:1
+      f.input :hst, min:0,max:1
       f.input :status, min:0,max:2
     end
     f.actions

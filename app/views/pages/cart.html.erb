@@ -18,7 +18,7 @@
                     <td class="cart-row"><%= item[:product].name %> </td>
                     <td class="cart-row"><input class="cart-qty" data-index="<%= index %>" type="number" value="<%= item[:quantity] %>" style="width:67px" min="1"></td>
                     <td  class="cart-row">$<%= item[:price] %></td>
-                    <td  class="cart-row">$<%= item[:cost] %></td>
+                    <td  class="cart-row">$<%= item[:price]*item[:quantity] %></td>
                     <td  class="cart-row" style="width: 10px;">
                     <%= button_to "Delete", remove_path(index: index), method: :delete, data: { confirm: "Are you sure?" } %>
                     </td>

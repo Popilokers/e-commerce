@@ -8,17 +8,18 @@ class PagesController < ApplicationController
     
     if @customer&.authenticate(params[:password])
 
-      session[:customer_first_name] = @customer.first_name   # store customer ID in session
-      session[:customer_last_name] = @customer.last_name   # store customer ID in session
-      session[:customer_full] = @customer.full_name   # store customer ID in session
-      session[:customer_email] = @customer.email   # store customer ID in session
-      session[:customer_id] = @customer.id   # store customer ID in session
-      session[:customer_address] = @customer.address   # store customer ID in session
-      session[:customer_province] = @customer.province.code  # store customer ID in session
-      session[:province_id] = @customer.province.id  # store customer ID in session
-      session[:province_gst] = @customer.province.gst  # store customer ID in session
-      session[:province_pst] = @customer.province.pst  # store customer ID in session
-      session[:province_hst] = @customer.province.hst  # store customer ID in session
+      session[:customer_first_name] = @customer.first_name   
+      session[:customer_last_name] = @customer.last_name   
+      session[:customer_full] = @customer.full_name    
+      session[:customer_email] = @customer.email    
+      session[:customer_id] = @customer.id    
+      session[:customer_address] = @customer.address    
+      session[:customer_province] = @customer.province.code   
+      session[:customer_points] = @customer.points
+      session[:province_id] = @customer.province.id   
+      session[:province_gst] = @customer.province.gst   
+      session[:province_pst] = @customer.province.pst   
+      session[:province_hst] = @customer.province.hst   
       session[:cart] ||= []
 
       flash[:notice] = "Login successful"

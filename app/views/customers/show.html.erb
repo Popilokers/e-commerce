@@ -1,11 +1,75 @@
+<div style="height: 93.55vh; ">
 
-<div style="height: 95vh">
 
+    <h1 class="title is-1" style="color: #1c4ecdff;">Customer</h1>
+    <div style="display:flex; justify-content:center; align-items:center;">
+        <div style="width:800px;border: 7px solid #122e74ff; border-radius:10px; padding:25px; display:flex; justify-content:center; align-items:center; ">
+           
+    
     <%# <h1>logged in as: <%=@customer.id %></h1>
-    <% if session[:customer_id] == @customer.id%>
-        <h1>logged in as: <%=session[:customer_full]%></h1>
-
-    <%else%>
-
-    <%end%>
+        <% if session[:customer_id] == @customer.id%>
+        <table>
+            <tr class="cart-row">
+                <td>Full name</h1>
+                <td><%=session[:customer_full]%></td>
+            </tr>
+            <tr class="cart-row">
+                <td>Email Address</h1>
+                <td><%=session[:customer_email]%></td>
+            </tr>
+            <tr class="cart-row">
+                <td>Address</h1>
+                <td><%=session[:customer_Address]||"No address"%></td>
+            </tr>
+            <tr class="cart-row">
+                <td>Province </h1>
+                <td><%=session[:customer_province]%></td>
+            </tr>
+            <tr class="cart-row">
+                <td>Points</h1>
+                <td><%=session[:customer_points]%></td>
+            </tr>
+        </table>
+        <%end%>
+        </div>
+    </div>
+    
+    <h1 class="title is-1" style="color: #1c4ecdff;">Customer Orders</h1>
+<div style="display:flex; justify-content:center; align-items:center;">
+        <div style="width:800px;border: 7px solid #122e74ff; border-radius:10px; padding:25px; display:flex; justify-content:center; align-items:center; ">
+           
+    
+    <%# <h1>logged in as: <%=@customer.id %></h1>
+        <% if session[:customer_id] == @customer.id%>
+        <table>
+            <tr>
+                <th style="color: #1c4ecdff;">Order ID</th>
+                <th style="color: #1c4ecdff;">Payment ID</th>
+                <th style="color: #1c4ecdff;">Grand Total</th>
+                <th style="color: #1c4ecdff;">Tax rate</th>
+                <th style="color: #1c4ecdff;">Order Status</th>
+            </tr>
+            <% @orders.each do |order|%>
+                <tr class="cart-row" onclick="window.location='/customer/<%=@customer.id%>/order/<%=order.id%>';">
+                    <td><%=order.id%></td>
+                    <td><%=order.payment_id%></td>
+                    <td><%=order.total%></td>
+                    <td><%=100*(order.hst.to_f + order.gst.to_f + order.pst.to_f)%>%</td>
+                    <td>
+                        <%=  case order.status
+                                when 0
+                                    "Not Ready"
+                                when 1
+                                    "Ready for Pickup"
+                                when 2
+                                    "Picked up"
+                            end%>
+                    </td>
+                </tr>
+                
+            <%end%>
+        </table>
+        <%end%>
+        </div>
+    </div>
 </div>

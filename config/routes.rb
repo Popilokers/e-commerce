@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get "customer/:id/order/:order_id", to: "order_items#show"
 
   post 'create_checkout_session', to: 'payments#create_checkout_session'
   get 'success', to: 'payments#success'
@@ -9,7 +10,7 @@ Rails.application.routes.draw do
   get "product/:id", to: "product#show", as: "product"
   get "product/:id/addtocart", to: "product#addToCart", as: "addtocart"
 
-  # get "customers/:id", to: "customers#show", as: "customer"
+  get "customer/:id", to: "customers#show", as: "customer"
   resources :customers, only: [:new, :create, :show]
 
   get "pages/login", to: "pages#login", as: "login"

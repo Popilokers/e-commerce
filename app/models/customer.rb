@@ -3,7 +3,7 @@ require 'bcrypt'
 class Customer < ApplicationRecord
 
   belongs_to :province
-
+  has_many :order
   has_secure_password  
 
   after_initialize :set_default_points, if: :new_record?

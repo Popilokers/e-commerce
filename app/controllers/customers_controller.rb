@@ -1,6 +1,11 @@
 class CustomersController < ApplicationController
   def show
     @customer = Customer.find(params[:id])
+    unless session['customer_id'] == @customer.id
+      redirect_to login_path
+    end
+
+    @orders = @customer.order
   end
 
   def new
