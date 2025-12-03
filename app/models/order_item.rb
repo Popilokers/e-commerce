@@ -8,5 +8,5 @@ class OrderItem < ApplicationRecord
 
   validates :order_id, presence:true, numericality:{only_integer: true, greater_than:0}
   validates :product_id, presence:true, numericality:{only_integer: true, greater_than:0}
-  validates :cost, presence:true, numericality:{only_integer: true, greater_than:0}
+  validates :cost, presence:true, numericality:{only_decimal: true, greater_than:0}
 end

@@ -53,7 +53,8 @@ class PagesController < ApplicationController
     @cart_items = (session[:cart] || []).map do |item|
       product = Product.find_by(id: item["product_id"])
       quantity = item["quantity"]
-      { product: product, quantity: quantity }
+      price = product.price
+      { product: product, quantity: quantity, price: price}
     end
   end
 

@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
 
+  post 'create_checkout_session', to: 'payments#create_checkout_session'
+  get 'success', to: 'payments#success'
+  get 'cancel', to: 'payments#cancel'
+
+
   get "product", to: "product#index", as: "products_index"
   get "product/:id", to: "product#show", as: "product"
   get "product/:id/addtocart", to: "product#addToCart", as: "addtocart"

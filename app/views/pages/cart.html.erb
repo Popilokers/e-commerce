@@ -11,13 +11,14 @@
             <th class="title is-3" style="color: #1c4ecdff;">Unit Price</th>
             <th class="title is-3" style="color: #1c4ecdff;">Price</th>
         </tr>
+        
     <% @cart_items.each_with_index do |item, index| %>
             <% if item[:product] %>
                 <tr>
                     <td class="cart-row"><%= item[:product].name %> </td>
                     <td class="cart-row"><input class="cart-qty" data-index="<%= index %>" type="number" value="<%= item[:quantity] %>" style="width:67px" min="1"></td>
-                    <td  class="cart-row">$<%= item[:product].price %></td>
-                    <td  class="cart-row">$<%= item[:product].price * item[:quantity] %></td>
+                    <td  class="cart-row">$<%= item[:price] %></td>
+                    <td  class="cart-row">$<%= item[:cost] %></td>
                     <td  class="cart-row" style="width: 10px;">
                     <%= button_to "Delete", remove_path(index: index), method: :delete, data: { confirm: "Are you sure?" } %>
                     </td>
@@ -27,10 +28,12 @@
 
       </table>
       <% subtotal = @cart_items.sum { |item| item[:product].price * item[:quantity] }%>
+
       <% pst = subtotal * BigDecimal(session[:province_pst].to_s) %>
       <% gst = subtotal * BigDecimal(session[:province_gst].to_s) %>
       <% hst = subtotal * BigDecimal(session[:province_hst].to_s) %>
       <% grandtotal = subtotal + gst + pst + hst%>
+      <% session[:cart_total] = grandtotal%>
 
       <%= form_with url: update_province_path, method: :get, local: true do %>
         <%= select_tag :province_id,

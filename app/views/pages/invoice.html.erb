@@ -41,9 +41,8 @@
         <p  class="title is-5" style="color: #1c4ecdff; margin-right:8px">
           Grand Total: $<%= grandtotal %>
         </p>
-        <%#= button_to "Checkout", invoice_path, method: :get %>
+        <%= button_to "Checkout with Stripe", create_checkout_session_path, method: :post,data: { turbo: false } %>
         
-        <div id="paypal"></div>
       </div>
     <% end %>
 </div>

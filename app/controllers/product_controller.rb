@@ -33,7 +33,8 @@ class ProductController < ApplicationController
     session[:cart] ||=[]
     @product = Product.find(params[:id])
     flash[:notice] = "#{@product.name} added to cart!"
-    session[:cart] << { product_id: @product.id, quantity: params[:quantity].to_i }
+    session[:cart] << { product_id: @product.id, quantity: params[:quantity].to_i, price: @product.price.to_f }
+     puts session[:cart].inspect 
     redirect_to root_path
   end
 end
