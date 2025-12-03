@@ -1,6 +1,6 @@
 ActiveAdmin.register OrderItem do
   permit_params :order_id, :product_id, :cost
-  actions :all, except: [:new, :create, :destroy, :edit]
+  actions :all, except: [:new, :create]
 
   index do
     selectable_column
@@ -9,6 +9,7 @@ ActiveAdmin.register OrderItem do
     column 'OrderItem' do |item|
       item.product.name  # display the name instead of product_id
     end
+    column :quantity
     column :cost
     actions
   end
@@ -32,6 +33,7 @@ ActiveAdmin.register OrderItem do
       row 'OrderItem' do |item|
         item.product.name  # display the name instead of product_id
       end
+      row :quantity
       row :cost
     end
   end

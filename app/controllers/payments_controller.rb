@@ -53,7 +53,11 @@ class PaymentsController < ApplicationController
     order=Order.create!(
       customer_id: session[:customer_id],    # if applicable
       payment_id: payment_intent_id,
-      total: session[:cart_total]
+      total: session[:cart_total],
+      pst: session[:province_pst],
+      gst: session[:province_gst],
+      hst: session[:province_hst],
+      status: 0
     )
   session[:cart].each do |item|
     OrderItem.create!(
